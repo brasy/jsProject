@@ -1,0 +1,84 @@
+http://www.cnblogs.com/zhengcheng/p/4176716.html
+
+/....../  代表一个模式的开始和结束。  
+^  匹配字符串的开始     
+$  匹配字符串的结束   
+\s  任何空白字符    
+\S  任何非空白字符  
+\d  匹配一个数字字符，等价于[0-9]。 
+\D  匹配数字之外的任何数字，等价于[^0-9]。 
+\w  匹配一个数字，下划线或者字母字符，等价于[A-Za-z0-9_]。 
+\W  匹配非单字字符，等价于[^A-Za-z0-9_]   
+.  除了换行符之外的任意字符。 
+{n} 匹配前一项n次。    
+{n,} 匹配前一项n次以上。   
+{n,m} 匹配前一项n次，但不能超过m次。   
+* 匹配前一项0次或多次，等价于{0，}    
++ 匹配前一项1次或多次，等价于{1，}   
+? 匹配前一项0次或者1次，也就是说前一项是可选的，等价于{0,1}；
+转移字符反斜杠"\" 
+
+RegExp(Regular Expression，正则表达式)对象时对象时对字符串执行模式匹配的强大工具。定义正则表达式有两种方式，一种是普通方式，另一种是构造函数方式
+1、普通方式：　
+var reg = /表达式/附加函数
+在语法中：　　表达式：一个字符串，指定了正则表达式的模式
+附加参数：用来扩展表达式的含义，主要有一下3个参数：
+g：代表可以进行全局匹配。
+i：代表不区分大小写匹配。
+m：代表可以进行多行匹配。
+上面3个参数可以任意组合，代表复合含义，当然也可以不加参数
+
+2、构造函数方式　　var reg = new RegExp(表达式，附加参数);
+
+注意：普通方式中的表达式必须是一个常量字符串，而构造函数中的表达式可以是常量字符串，也可以使一个JavaScript变量。
+例如：根据用户输入的值作为正则表达式的参数：　　var reg = new RegExp(document.getElementById("id").value,"g");
+
+3、test()　　test(string)方法用于验证字符串是否符合要求，如果符合返回true，不符合则返回false。
+
+var email = "zhangsan@qq.com";    
+var reg = new RegExp(/^\w+@\w+(\.[A-Za-z]{2,3}){1,2}$/);     
+reg.test(email);
+
+
+三、String对象和正则表达式
+JavaScript除了支持RegExp对象的正则表达式方法外，
+还支持String对象的正则表达式方法，
+String对象定义了使用正则表达式来执行强大的模式匹配和文本检索与替换函数的方法，
+String常用的方法如下所示：　　
+1、match()：　　match()方法可以再字符串内检索指定的值，找到一个或多个正则表达式的匹配。　　
+语法：　　字符串对象.match(searchString或regexpObject);
+searchString是要检索的字符串的值
+regexpObject是规定要匹配模式的regexp对象。
+例如:　　var str = "my cat";
+var reg = /cat/;
+var result=str.match(reg);　
+result的值为:cat。 
+
+2、search()：　　search()方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串。
+该方法不执行全局匹配，返回子字符串的第一个匹配的位置，如果没找到任何匹配的子串，则返回-1，与String的indexOf()方法类似。
+语法：　　字符串对象.search(searchString或regexpObject);
+searchString是要检索的字符串的值
+regexpObject是规定要匹配模式的regexp对象。
+例如：var str = "hello rock!rock!";
+var result = str.search(/rock/);
+result的值为：6；
+
+3、replace()：　　repleace()方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串。
+语法：　　字符串对象.replace(RegExp对象获字符串，"替换的字符串")　
+如果设置了全文检索，则符合条件的RegExp或字符串都将被替换，否则只替换第一个，返回替换后的字符串，
+例如：var str = "My little white cat,is really a very lively cat";
+var result = str.replace(/cat/,"dog");
+var results = str.reaplace(/cat/g,"dog");　
+result的值： My little white dog,is really a very lively cat　
+results的值：My little white dog,is really a very lively dog 
+
+4、split()：　　split()方法将字符串分割成一系列子串并通过一个数组将这一系列子串返回。
+语法：　　字符串对象.split(分隔符,n);　　分隔符可以使字符串，也可以使正则表达式。
+n为限制输出数组的个数，为可选项，如果不设置n，则返回包含整个字符串的元素数组，
+例如：   var str = "red,blue,green,white";
+　　var result = str.split(",");
+　　var string = "";
+　　for(var i = 0;i<result.length;i++){
+　　　　string+=result[i] + "_";
+　　}　　document.write(string);　
+  结果为：　　red_blue_green_white_;
