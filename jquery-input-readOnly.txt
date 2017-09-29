@@ -1,0 +1,6 @@
+1. jquery  通过id属性设置与取消只读属性
+设置只读：$("#id").attr("readOnly","true");
+取消只读：$("#id").attr("readOnly",false);
+2. jquery  批量设置与取消只读属性/*   id为sa的div中，所有input框    */
+设置只读：$("#sa input").attr("readOnly","true");
+取消只读：$("#sa input").attr("readOnly",false
