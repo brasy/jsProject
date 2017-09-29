@@ -27,3 +27,13 @@
  }); 
  //export object
  module.exports = upload; 
+
+
+
+//in router.js to use method
+var upload = require('./fileupload.js');
+router.post('/importFile', upload.single('avatar'), function (req,res,next) {
+ if(req.file){
+  res.send("file updata success!");
+ } 
+});
